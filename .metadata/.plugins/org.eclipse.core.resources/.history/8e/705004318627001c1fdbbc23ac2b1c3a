@@ -1,0 +1,27 @@
+package az.com.main;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter as \n1.Admin\n2.User ");
+		System.out.println("Choice : ");
+		int choice = sc.nextInt();
+		String arr[] = null;
+		switch (choice) {
+
+		case 1:
+			if (Method.checkAdminUserNameAndPassword(Method.enterUserNameAndPassword())) {
+				System.out.println("Successfully done !");
+			}
+			break;
+		case 2:
+			break;
+		default:
+			System.out.println("Invalid option !");
+		}
+
+	}
+}

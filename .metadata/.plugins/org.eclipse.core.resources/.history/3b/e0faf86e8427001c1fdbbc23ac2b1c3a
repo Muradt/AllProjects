@@ -1,0 +1,40 @@
+package az.com.main;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class FileUtility {
+	private static final String PATH_TO_ADMIN_LOGINS = "C:\\Users\\hp\\Desktop\\DictionarySystem\\AdminLoginParol.txt";
+
+	public static void writeAdminLoginsintoFile(String adminUserName, String adminPassword, boolean a)
+			throws IOException {
+
+		FileWriter fw = new FileWriter(PATH_TO_ADMIN_LOGINS, a);
+		try (BufferedWriter bw = new BufferedWriter(fw);) {
+			bw.write(adminUserName + "&&" + adminPassword);
+			bw.newLine();
+		}
+		System.out.println("Successfully Done !");
+
+	}
+
+	public static Map<String, String> readAdminLogins() throws IOException {
+		try (FileReader fr = new FileReader(PATH_TO_ADMIN_LOGINS); BufferedReader reader = new BufferedReader(fr);) {
+			Map<String, String> adminLogins = new HashMap<>();
+
+			while (reader.ready()) {
+				String[] line = reader.readLine().split("&&");
+				adminLogins.put(line[0], line[1]);
+			}
+			return adminLogins;
+
+		}
+	}
+
+}

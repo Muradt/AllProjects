@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;az.Murad.main.main&apos; to &apos;Main&apos;&#x0D;&#x0A;- Original project: &apos;HomeWorkOOP2New&apos;&#x0D;&#x0A;- Original element: &apos;az.Murad.main.main&apos;&#x0D;&#x0A;- Renamed element: &apos;az.Murad.main.Main&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;main&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;az.Murad.main{main.java[main" matchStrategy="1" name="Main" qualified="false" references="true" similarDeclarations="false" stamp="1631650358840" textual="false" version="1.0"/>
+</session>

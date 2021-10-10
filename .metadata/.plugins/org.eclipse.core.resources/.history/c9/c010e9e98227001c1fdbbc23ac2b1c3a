@@ -1,0 +1,40 @@
+package az.com.main;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class FileUtility {
+	
+	public static void writeLoginsintoFile( boolean a) throws IOException {
+      
+        FileWriter fw = new FileWriter(PATH_TO_LOGINS, a);
+        try (BufferedWriter bw = new BufferedWriter(fw);) {
+            
+            bw.newLine();
+        }
+        System.out.println("Successfully Done !");
+
+    }
+	 public static List<Registration> readLogins() throws IOException {
+	        try (FileReader fr = new FileReader(PATH_TO_LOGINS);
+	             BufferedReader reader = new BufferedReader(fr);) {
+	            List<Registration> listOfLogins = new ArrayList<>();
+
+	            while (reader.ready()) {
+
+	                Registration p = new Registration();
+	                String[] arr = reader.readLine().split("&&");
+	                p.setUserName(arr[0]);
+	                p.setPassword(arr[1]);
+	                p.setIdentity(Integer.parseInt(arr[2]));
+	                listOfLogins.add(p);
+
+
+	            }
+	            return listOfLogins;
+
+	        }
+	    }
+
+}

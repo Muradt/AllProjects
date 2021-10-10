@@ -1,0 +1,30 @@
+package az.com.main;
+
+import java.util.Map;
+import java.util.Scanner;
+
+public class Method {
+	public static String[] enterUserNameAndPassword() {
+		Scanner sc = new Scanner(System.in);
+		String[] nameAndPassword = new String[2];
+		System.out.println("Enter user name :");
+		String userName = sc.next();
+		sc.nextLine();
+		System.out.println("Enter password :");
+		String password = sc.next();
+		nameAndPassword[0] = userName;
+		nameAndPassword[1] = password;
+		return nameAndPassword;
+	}
+
+	public static boolean checkAdminUserNameAndPassword(String userName, String password) throws Exception {
+		List<String> adminLogins = FileUtility.readAdminLogins();
+		boolean a = false;
+
+		if (adminLogins.containsKey(userName))
+			a = true;
+
+		return a;
+
+	}
+}

@@ -1,0 +1,176 @@
+package az.com.main;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter as \n1.Admin\n2.User ");
+		System.out.println("Choice : ");
+		int choice = sc.nextInt();
+		String arr[] = null;
+
+		switch (choice) {
+
+		case 1:
+			if (Method.checkAdminUserNameAndPassword(Method.enterUserNameAndPassword())) {
+				System.out.println("Existing Dictionaries : ");
+				List<String> dictionaries = FileUtility.readDictionaryfromFile();
+				for (int i = 0; i < dictionaries.size(); i++) {
+					System.out.println((i + 1) + "." + dictionaries.get(i));
+				}
+				System.out.println("-------------------");
+				System.out.println(
+						"1.Add new dictionary\n2.Update existing dictionary\n3.Delete Dictionary\n4.Add new admin");
+				System.out.print("Choice : ");
+				switch (sc.nextInt()) {
+				case 1:
+					System.out.println("Enter languages : (Azerbaijani-English or Russian-Turkish)");
+					System.out.print("From ");
+					String first = sc.next();
+					sc.nextLine();
+					System.out.print("To ");
+					String second = sc.next();
+					System.out.println("How Many word will you enter to the dictionary ? ");
+					int number;
+					System.out.print("Number : ");
+					number = sc.nextInt();
+					for (int i = 0; i < number; i++) {
+						System.out.println("Enter " + first + " word");
+						String word1 = sc.next();
+						System.out.println("Enter " + second + " word");
+						String word2 = sc.next();
+						FileUtility.writeWordsintoDictionary(first, second, word1, word2, true);
+					}
+					FileUtility.writeDictionaryintoFile(first, second, true);
+					System.out.println("Successfully done !!!");
+
+					break;
+				case 2:
+					System.out.println("Which dictionary ? ");
+					String dcName = sc.next();
+					System.out.println("1.Add word\n2.Delete word\n3.Change Word");
+					System.out.print("Choice : ");
+					int ch = sc.nextInt();
+					if (ch == 1) {
+						System.out.println("How Many new word will you enter to the dictionary ? ");
+						int count;
+						System.out.print("Number : ");
+						count = sc.nextInt();
+						for (int i = 0; i < count; i++) {
+							System.out.println("Enter " + dcName.split("-")[0] + " word");
+							String word1 = sc.next();
+							System.out.println("Enter " + dcName.split("-")[1] + " word");
+							String word2 = sc.next();
+							FileUtility.writeWordsintoDictionary(dcName.split("-")[0], dcName.split("-")[1], word1,
+									word2, true);
+						}
+						System.out.println("Successfully done !!!");
+					} else if (ch == 2) {
+						Map<String, String> dictionary = FileUtility.readWordsfromDictionary(dcName.split("-")[0],
+								dcName.split("-")[1]);
+						System.out.println("Enter the " + dcName.split("-")[0] + " to delete it");
+						String word = sc.next();
+						dictionary.remove(word);
+						List<String> keyList = new ArrayList<>();
+						keyList.addAll(dictionary.keySet());
+						List<String> values = new ArrayList<>();
+						values.addAll(dictionary.values());
+						for (int i = 0; i < dictionary.size(); i++) {
+							if (i == 0) {
+								FileUtility.writeWordsintoDictionary(dcName.split("-")[0], dcName.split("-")[1],
+										keyList.get(i), values.get(i), false);
+							} else {
+								FileUtility.writeWordsintoDictionary(dcName.split("-")[0], dcName.split("-")[1],
+										keyList.get(i), values.get(i), true);
+							}
+						}
+						System.out.println("Successfully done !!!");
+					} else if (ch == 3) {
+						Map<String, String> dictionary = FileUtility.readWordsfromDictionary(dcName.split("-")[0],
+								dcName.split("-")[1]);
+						System.out.println("Enter the " + dcName.split("-")[0] + " word to update it's translation");
+						String word = sc.next();
+						sc.nextLine();
+						System.out.println("Enter new Translation : ");
+						String newTr = sc.next();
+						dictionary.put(word, newTr);
+						List<String> keyList = new ArrayList<>();
+						keyList.addAll(dictionary.keySet());
+						List<String> values = new ArrayList<>();
+						values.addAll(dictionary.values());
+						for (int i = 0; i < dictionary.size(); i++) {
+							if (i == 0) {
+								FileUtility.writeWordsintoDictionary(dcName.split("-")[0], dcName.split("-")[1],
+										keyList.get(i), values.get(i), false);
+							} else {
+								FileUtility.writeWordsintoDictionary(dcName.split("-")[0], dcName.split("-")[1],
+										keyList.get(i), values.get(i), true);
+							}
+						}
+						System.out.println("Successfully done !!!");
+					} else
+						System.out.println("Invalid Option !!!");
+
+					break;
+				case 3:
+					System.out.println("Which dictionary ? ");
+					String dcname = sc.next();
+					File f = new File("C:\\Users\\hp\\Desktop\\DictionarySystem\\" + dcname.split("-")[0] + "-"
+							+ dcname.split("-")[1] + ".txt");
+					f.delete();
+					Method.deleteDictionaryNamefromFile(dcname);
+					System.out.println("Successfully done !!!");
+					break;
+				case 4:
+					System.out.println("Enter new Admin username : ");
+					String newAdminUserName = sc.next();
+					sc.nextLine();
+					System.out.println("Enter new Admin password : ");
+					String newAdminPassword = sc.next();
+					FileUtility.writeAdminLoginsintoFile(newAdminUserName, newAdminPassword, true);
+					System.out.println("Successfully done !!!");
+					break;
+
+				default:
+					System.out.println("Invalid Option !!!");
+				}
+			}
+
+			break;
+		case 2:
+			if (Method.checkUserUserNameAndPassword(Method.enterUserNameAndPassword())) {
+				System.out.println("Existing Dictionaries : ");
+				List<String> dictionaries = FileUtility.readDictionaryfromFile();
+				for (int i = 0; i < dictionaries.size(); i++) {
+					System.out.println((i + 1) + "." + dictionaries.get(i));
+				}
+				System.out.println("-------------------");
+				System.out.println("Choice : (write the name of dictionary)");
+				String dcName = sc.next();
+				Map<String, String> dictionary = FileUtility.readWordsfromDictionary(dcName.split("-")[0],
+						dcName.split("-")[1]);
+				System.out.println("Enter the " + dcName.split("-")[0] + " word :");
+				String word = sc.next();
+				String result = dictionary.get(word);
+				if (result != null)
+					System.out.println("Result : " + result);
+				else 
+					System.out.println("No information !");
+
+			}
+			System.out.println("Succesfully done !!!");
+			break;
+		default:
+			System.out.println("Invalid option !");
+		}
+		main(args);
+
+	}
+}

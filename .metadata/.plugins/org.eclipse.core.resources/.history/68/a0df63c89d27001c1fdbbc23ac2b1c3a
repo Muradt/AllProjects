@@ -1,0 +1,54 @@
+package az.com.main;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Method {
+	public static String[] enterUserNameAndPassword() {
+		Scanner sc = new Scanner(System.in);
+		String[] nameAndPassword = new String[2];
+		System.out.println("Enter user name :");
+		String userName = sc.next();
+		sc.nextLine();
+		System.out.println("Enter password :");
+		String password = sc.next();
+		nameAndPassword[0] = userName;
+		nameAndPassword[1] = password;
+		return nameAndPassword;
+	}
+
+	public static boolean checkAdminUserNameAndPassword(String[] nameAndPassword) throws Exception {
+		List<String[]> adminLogins = FileUtility.readAdminLogins();
+		boolean a = false;
+
+		for (int i = 0; i < adminLogins.size(); i++) {
+
+			if (adminLogins.get(i)[0].equalsIgnoreCase(nameAndPassword[0]) && adminLogins.get(i)[1].equals(nameAndPassword[1])) {
+				a = true;
+			}
+		}
+
+		return a;
+
+	}
+	public static boolean checkUserUserNameAndPassword(String[] nameAndPassword) throws Exception {
+		List<String[]> userLogins = FileUtility.readUserLogins();
+		boolean a = false;
+
+		for (int i = 0; i < userLogins.size(); i++) {
+
+			if (userLogins.get(i)[0].equalsIgnoreCase(nameAndPassword[0]) && userLogins.get(i)[1].equals(nameAndPassword[1])) {
+				a = true;
+			}
+		}
+
+		return a;
+
+	}
+	
+	public static void deleteDictionaryNamefromFile() {
+		
+	}
+	
+}

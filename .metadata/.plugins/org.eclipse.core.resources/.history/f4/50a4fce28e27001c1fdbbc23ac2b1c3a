@@ -1,0 +1,63 @@
+package az.com.main;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter as \n1.Admin\n2.User ");
+		System.out.println("Choice : ");
+		int choice = sc.nextInt();
+		String arr[] = null;
+
+		switch (choice) {
+
+		case 1:
+			if (Method.checkAdminUserNameAndPassword(Method.enterUserNameAndPassword())) {
+				System.out.println("1.Add new dictionary\n2.Update existing dictionary\n3.Delete Dictionary");
+				System.out.print("Choice : ");
+				switch (sc.nextInt()) {
+				case 1:
+					System.out.println("Enter languages : (Azerbaijani-English or Russian-Turkish)");
+					System.out.print("From ");
+					String first = sc.next();
+					sc.nextLine();
+					System.out.print("To ");
+					String second = sc.next();
+					System.out.println("How Many word will you enter to the dictionary ? ");
+					int number;
+					System.out.print("Number : ");
+					number = sc.nextInt();
+					for (int i = 0; i < number; i++) {
+						System.out.println("Enter " + first + " word");
+						String word1 = sc.next();
+						System.out.println("Enter " + second + " word");
+						String word2 = sc.next();
+						FileUtility.writeWordsintoDictionary(first, second, word1, word2, true);
+					}
+					FileUtility.writeDictionaryintoFile(first, second, true);
+					System.out.println("Successfully done !!!");
+
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					break;
+				default:
+					System.out.println("Invalid Option !!!");
+				}
+			}
+			break;
+		case 2:
+			if (Method.checkUserUserNameAndPassword(Method.enterUserNameAndPassword())) {
+
+			}
+			break;
+		default:
+			System.out.println("Invalid option !");
+		}
+
+	}
+}
