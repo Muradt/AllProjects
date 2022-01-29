@@ -1,3 +1,2 @@
-# AllProjects
-All projects by me
+# Projects
 These are little alghoritms and projects were written by me.
